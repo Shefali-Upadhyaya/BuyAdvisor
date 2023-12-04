@@ -223,6 +223,7 @@ def reviewProduct(urlPage):
                             return redirect(url_for("reviewProduct"))
                     except:
                         message = "The analysis was could not be processed. Uncaught Exception. Try analyzing another product from amazon.com."
+                        print("Unable to scrap reviews")
                         flash(message, 'Error')
                         print(message)
                     else:
