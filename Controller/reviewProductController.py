@@ -82,7 +82,7 @@ def getProductTitle(asin):
 # Function to classify reviews
 def classifyReviews(payload):
     API_URL = "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english"
-    headers = {"Authorization": "Bearer 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"}
+    headers = {"Authorization": "enter_authorization_code_here"}
 
     response = requests.post(API_URL, headers=headers, json=payload)
     reviewsClassified = response.json()
