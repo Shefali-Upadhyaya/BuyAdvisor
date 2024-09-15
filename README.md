@@ -11,10 +11,3 @@ With online shopping these days, buyers face a challenge to decide which product
 5. VCS: Git and GitHub
 6. Project Management: JIRA
 7. Communication: Google Meet
-
-## Team Members
-
-1. Shefali Upadhyaya
-2. Iona Thomas
-3. Jagadeesh Alagan
-4. Revanth Velagandula
