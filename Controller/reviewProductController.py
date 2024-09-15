@@ -37,8 +37,8 @@ def scrapReviews(asin):
     url = "https://real-time-amazon-data.p.rapidapi.com/product-reviews"
 
     headers = {
-        "X-RapidAPI-Key": "4f379d1851msh6ea897038188405p1667ddjsnba6c97df884b",
-        "X-RapidAPI-Host": "real-time-amazon-data.p.rapidapi.com"
+        "X-RapidAPI-Key": "enter_key_here",
+        "X-RapidAPI-Host": "enter_host_here"
     }
 
     flag = 0
