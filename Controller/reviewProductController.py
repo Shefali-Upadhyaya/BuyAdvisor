@@ -21,7 +21,7 @@ def extractAsin(url):
     return asin
 
 
-# Function to check if the url enterred by the user is valid or not
+# Function to check if the url entered by the user is valid or not
 def validURLCheck(url):
     if "https://www" not in url:
         url = "https://" + url
@@ -79,13 +79,33 @@ def getProductTitle(asin):
     return title_string
 
 
+# Function to classify reviews
+def classifyReviews(payload):
+    API_URL = "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english"
+    headers = {"Authorization": "enter_authorization_code_here"}
+
+    response = requests.post(API_URL, headers=headers, json=payload)
+    reviewsClassified = response.json()
+    result=[]
+    for i in reviewsClassified:
+        result.append(i[0]['label'])
+    print(result)
+    return result
+
+
 # Function to analyze the reviews scrapped
 def analyzeReviews(reviews):
     score = {'POS': 0, 'NEG': 0}
-    classification = pipeline('sentiment-analysis', model="distilbert-base-uncased-finetuned-sst-2-english")
-    result = classification(reviews)
+    cleanUpReviews = []
+    for i in reviews:
+        if len(i.split()) <= 450:
+            cleanUpReviews.append(i)
+    print(cleanUpReviews)
+    result = classifyReviews({
+        "inputs": cleanUpReviews
+    })
     for i in result:
-        match i['label']:
+        match i:
             case 'POSITIVE':
                 score['POS'] += 1
             case 'NEGATIVE':
@@ -203,6 +223,7 @@ def reviewProduct(urlPage):
                             return redirect(url_for("reviewProduct"))
                     except:
                         message = "The analysis was could not be processed. Uncaught Exception. Try analyzing another product from amazon.com."
+                        print("Unable to scrap reviews")
                         flash(message, 'Error')
                         print(message)
                     else:
